@@ -1,0 +1,9 @@
+@import '../../../styles/settings.scss';
+
+.copyRights {
+  font-weight: 500;
+  font-size: $base-size;
+  color: $color-text;
+  margin: $base-size;
+  text-transform: capitalize;
+}
