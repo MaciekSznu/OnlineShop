@@ -12,18 +12,6 @@ import RegulaminPage from './components/pages/Regulamin/RegulaminPage';
 
 class App extends React.Component {
 
-  // state = {
-  //   products: [],
-  // }
-
-  // componentDidMount() {
-  //   fetch('http://localhost:8000/api/products')
-  //     .then(res => res.json())
-  //     .then(res => {
-  //       this.setState({ products: res });
-  //     });
-  // }
-
   render() {
     return (
       <MainLayout>
@@ -36,13 +24,6 @@ class App extends React.Component {
           <Route path="/products/:id" exact component={ProductPage} />
           {/* <Route component={NotFound} /> */}
         </Switch>
-
-
-      {/* <div>
-        <ul>
-          {this.state.products.map(product => <li key={product.id}>{product.name}</li>)}
-        </ul>
-      </div> */}
       </MainLayout>
     );
   }

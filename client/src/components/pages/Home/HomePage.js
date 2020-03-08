@@ -1,8 +1,14 @@
 import React from 'react';
+import SortBox from '../../features/SortBox/SortBox';
+import ProductsList from '../../features/ProductsList/ProductsList';
+import ProductsCounter from '../../features/ProductsCounter/ProductsCounter';
+
 
 const HomePage = () => (
   <div>
-    <h1>Home</h1>
+    <SortBox />
+    <ProductsCounter />
+    <ProductsList />
   </div>
 );
 
