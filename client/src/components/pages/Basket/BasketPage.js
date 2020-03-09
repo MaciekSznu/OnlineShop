@@ -1,9 +1,8 @@
 import React from 'react';
+import Basket from '../../features/Basket/Basket';
 
 const BasketPage = () => (
-  <div>
-    <h1>Basket</h1>
-  </div>
+  <Basket />
 );
 
 export default BasketPage;

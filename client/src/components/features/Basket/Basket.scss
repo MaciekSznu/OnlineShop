@@ -1,0 +1,38 @@
+@import '../../../styles/settings.scss';
+
+.basketProductWrapper {
+  min-height: 260px;
+  padding: 20px 0;
+  border: 1px solid black;
+
+  .basketProductPhoto {
+    height: 100%;
+    min-height: 200px;
+    background: $product-wrapper-background;
+    padding: 20px;
+  }
+
+  .basketProductDescriptionWrapper {
+
+    height: 100%;
+
+    .basketProductName {
+      font-size: $base-size * 1.2;
+      
+    }
+
+    .basketProductDescription {
+      font-size: $base-size;
+    }
+  }
+
+  .basketProductPrice {
+    font-size: $base-size;
+  }
+
+  .removeFromBasket {
+    padding: 8px 20px;
+    font-size: $base-size *0.8;
+    border-radius: 0;
+  }
+}
