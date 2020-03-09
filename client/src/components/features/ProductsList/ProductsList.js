@@ -3,25 +3,21 @@ import { Container, Row, Col } from 'reactstrap';
 import './ProductsList.scss';
 
 class ProductsList extends React.Component {
-    state = {
-    products: [],
-  }
 
   componentDidMount() {
-    fetch('http://localhost:8000/api/products')
-      .then(res => res.json())
-      .then(res => {
-        this.setState({ products: res });
-      });
+    const { loadProducts } = this.props;
+    loadProducts();
   }
 
   render() {
+
+    const { products } = this.props;
     return (
       <div>
         <h4>Products List</h4>
         <Container>
           <Row>
-          {this.state.products.map(product =>
+          {products.map(product =>
             <Col lg="6" className="productWrapper" key={product.id}>
               <div className="productPhoto">
                 <img src={'client/src/assets/ProductsImages/' + product.photo} alt={''} />
@@ -41,6 +37,20 @@ class ProductsList extends React.Component {
       </div>
     );
   }
+};
+
+ProductsList.propTypes = {
+  products: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      price: PropTypes.string.isRequired,
+      description: PropTypes.string.isRequired,
+      photo: PropTypes.string.isRequired,
+      label: PropTypes.string,
+    })
+  ),
+  loadProducts: PropTypes.func.isRequired,
 };
 
 export default ProductsList;
