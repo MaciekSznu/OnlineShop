@@ -50,10 +50,10 @@ class Basket extends React.Component {
           </Container>
           <Container>
             <Row>
-              <Col>
-                <div>kod rabatowy</div>
-                <div>Total:</div>
-                <Button className="payForBasket" color="secondary">Usuń produkt</Button>
+              <Col className="d-flex mt-5 mb-5 flex-column align-items-end basketSummary">
+                <div className="mb-3 text-center basketDiscountCode">kod rabatowy</div>
+                <div className="mb-3 text-center basketTotalPrice">Total:</div>
+                <Button className="payForBasket" color="secondary">Zapłać</Button>
               </Col>
             </Row>
           </Container>
