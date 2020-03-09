@@ -7,7 +7,10 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "npm-run-all -p -l start:*",
     "start:server": "cd server && node server.js",
-    "start:client": "cd client && npm start"
+    "start:client": "cd client && npm start",
+    "install:client": "cd client && npm install",
+    "install:server": "cd server && npm install",
+    "postinstall": "run-p install:*"
   },
   "repository": {
     "type": "git",

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container, Row, Col } from 'reactstrap';
-import './ProductsList.scss';
+import './ProductSummary.scss';
 
 class ProductsList extends React.Component {
     state = {
@@ -25,13 +25,10 @@ class ProductsList extends React.Component {
             <Col lg="6" className="productWrapper" key={product.id}>
               <div className="productPhoto">
                 <img src={'client/src/assets/ProductsImages/' + product.photo} alt={''} />
-                <p class="productLabel">{product.label}</p>
-              {/* </div>
-              <div className="productDescriptionWrapper"> */}
-                <div class="productInfoWrapper">
-                  <p class="productInfoName">{product.name}</p>
-                  <p class="productInfoPrice">{product.price} zł</p>
-                  {/* <p>{product.description}</p> */}
+                <p className="productLabel">{product.label}</p>
+                <div className="productInfoWrapper">
+                  <p className="productInfoName">{product.name}</p>
+                  <p className="productInfoPrice">{product.price} zł</p>
                 </div>
               </div>
             </Col>

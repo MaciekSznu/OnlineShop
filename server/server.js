@@ -14,7 +14,7 @@ app.get('/api/products', (req, res) => {
       name: 'Product 1',
       price: 69.99,
       description: 'Product 1 description',
-      photo: '/assets/glass_1_400.jpg',
+      photo: 'glass_1_400.jpg',
       label: 'Nowość',
     },
     {
@@ -22,7 +22,7 @@ app.get('/api/products', (req, res) => {
       name: 'Product 2',
       price: 69.99,
       description: 'Product 2 description',
-      photo: '/assets/glass_2_400.jpg',
+      photo: 'glass_2_400.jpg',
       label: 'Nowość',
     },
   ]
