@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const config = require('./config');
+const mongoose = require('mongoose');
 
 const app = express();
 
@@ -11,11 +12,12 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use('/api', productRoutes);
 
-// app.get('/api/products', (req, res) => {
-//   const data = products;
-//   res.json(data);
-// });
+mongoose.connect(config.DB, {useNewUrlParser: true, useUnifiedTopology: true});
+const db = mongoose.connection;
 
-app.listen(8000, () => {
+db.once('open', () => console.log(`Connected to the database`));
+db.on('error', (err) => console.log(`Error ${err}`));
+
+app.listen(config.PORT, () => {
   console.log('Server is running on port:', config.PORT);
 });
