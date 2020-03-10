@@ -19,13 +19,12 @@ class ProductSummary extends React.Component {
     const { products, request } = this.props;
     return (
       <div>
-        <h4>Products List</h4>
         { (request.pending === true || request.success == null) && <Spinner /> }
         { (request.pending === false && request.success === true) &&
           <Container>
             <Row>
             {products.map(product =>
-              <Col lg="6" className="productWrapper" key={product.id}>
+              <Col lg="6" className="p-2 productWrapper" key={product.id}>
                 <div className="productPhoto">
                   <img src={'client/src/assets/ProductsImages/' + product.photo} alt={''} />
                   <p className="productLabel">{product.label}</p>
