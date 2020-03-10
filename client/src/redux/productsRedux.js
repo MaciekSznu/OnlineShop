@@ -21,6 +21,7 @@ export const loadProductsRequest = () => {
     try {
 
       const res = await axios.get(`${API_URL}/products`);
+      await new Promise((resolve, reject) => setTimeout(resolve, 1000));
       dispatch(loadProducts(res.data));
     
     } catch(err) {
