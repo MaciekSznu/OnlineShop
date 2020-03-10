@@ -46,7 +46,7 @@ export const loadProductsRequest = () => {
   };
 };
 
-export const loadSingleProductRequest = () => {
+export const loadSingleProductRequest = (id) => {
   return async dispatch => {
 
     dispatch(startRequest());
