@@ -1,6 +1,7 @@
 import React from 'react';
 import { Container, Row, Col, Button } from 'reactstrap';
 import './Basket.scss';
+import cutText from '../../../utils/CutText';
 
 class Basket extends React.Component {
     state = {
@@ -30,7 +31,7 @@ class Basket extends React.Component {
                 <Col lg="6">
                   <div className="d-flex flex-column justify-content-center basketProductDescriptionWrapper">
                     <p className="basketProductName">{product.name}</p>
-                    <p className="basketProductDescription">{product.description}</p>
+                    <p className="basketProductDescription">{cutText(product.description, 250)}</p>
                   </div>
                 </Col>
                 <Col lg="2" className="d-flex flex-column justify-content-center">
