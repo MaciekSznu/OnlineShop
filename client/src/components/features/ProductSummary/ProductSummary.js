@@ -49,7 +49,7 @@ ProductSummary.propTypes = {
     PropTypes.shape({
       id: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
-      price: PropTypes.string.isRequired,
+      price: PropTypes.number.isRequired,
       description: PropTypes.string.isRequired,
       photo: PropTypes.string.isRequired,
       label: PropTypes.string,
