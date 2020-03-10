@@ -2,6 +2,10 @@ import React from 'react';
 import { PropTypes } from 'prop-types';
 import { Container, Row, Col } from 'reactstrap';
 import './ProductSummary.scss';
+import Spinner from '../../common/Spinner/Spinner';
+import Alert from '../../common/Alert/Alert';
+
+
 
 class ProductSummary extends React.Component {
 
@@ -12,26 +16,30 @@ class ProductSummary extends React.Component {
 
   render() {
 
-    const { products } = this.props;
+    const { products, request } = this.props;
     return (
       <div>
         <h4>Products List</h4>
-        <Container>
-          <Row>
-          {products.map(product =>
-            <Col lg="6" className="productWrapper" key={product.id}>
-              <div className="productPhoto">
-                <img src={'client/src/assets/ProductsImages/' + product.photo} alt={''} />
-                <p className="productLabel">{product.label}</p>
-                <div className="productInfoWrapper">
-                  <p className="productInfoName">{product.name}</p>
-                  <p className="productInfoPrice">{product.price} zł</p>
+        { (request.pending === true || request.success == null) && <Spinner /> }
+        { (request.pending === false && request.success === true) &&
+          <Container>
+            <Row>
+            {products.map(product =>
+              <Col lg="6" className="productWrapper" key={product.id}>
+                <div className="productPhoto">
+                  <img src={'client/src/assets/ProductsImages/' + product.photo} alt={''} />
+                  <p className="productLabel">{product.label}</p>
+                  <div className="productInfoWrapper">
+                    <p className="productInfoName">{product.name}</p>
+                    <p className="productInfoPrice">{product.price} zł</p>
+                  </div>
                 </div>
-              </div>
-            </Col>
-            )}
-          </Row>
-        </Container>
+              </Col>
+              )}
+            </Row>
+          </Container>
+        }
+        { (request.pending === false && request.error !== null) && <Alert variant="error"> {request.error} </Alert> }
       </div>
     );
   }
