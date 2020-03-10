@@ -1,18 +1,30 @@
 const express = require('express');
 const cors = require('cors');
-const products = require('./testProducts');
+const config = require('./config');
+const mongoose = require('mongoose');
+const helmet = require('helmet');
+const loadTestData = require('./testProducts');
 
 const app = express();
 
+const productRoutes = require('./routes/product.routes');
+
 app.use(cors());
+app.use(helmet());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+app.use('/api', productRoutes);
 
-app.get('/api/products', (req, res) => {
-  const data = products;
-  res.json(data);
+mongoose.connect(config.DB, {useNewUrlParser: true, useUnifiedTopology: true});
+const db = mongoose.connection;
+
+db.once('open', () => {
+  console.log(`Connected to the database`);
+  loadTestData();
 });
 
-app.listen(8000, () => {
-  console.log('Server is running on port:', 8000);
+db.on('error', (err) => console.log(`Error ${err}`));
+
+app.listen(config.PORT, () => {
+  console.log('Server is running on port:', config.PORT);
 });
