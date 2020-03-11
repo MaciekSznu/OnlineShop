@@ -6,7 +6,6 @@ import Spinner from '../../common/Spinner/Spinner';
 import Alert from '../../common/Alert/Alert';
 
 
-
 class ProductSummary extends React.Component {
 
   componentDidMount() {
@@ -26,7 +25,7 @@ class ProductSummary extends React.Component {
             {products.map(product =>
               <Col lg="6" className="p-2 productWrapper" key={product.id}>
                 <div className="productPhoto">
-                  <img src={'client/src/assets/ProductsImages/' + product.photo} alt={''} />
+                  <img src={'http://localhost:3000/' + product.photo} alt={''} />
                   <p className="productLabel">{product.label}</p>
                   <div className="productInfoWrapper">
                     <p className="productInfoName">{product.name}</p>
