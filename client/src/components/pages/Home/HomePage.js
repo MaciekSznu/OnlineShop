@@ -9,10 +9,10 @@ import SingleProduct from '../../features/SingleProduct/SingleProduct';
 const HomePage = () => (
   <Container>
     <Row>
-      <Col lg="4">
+      <Col lg="3">
         <SortBox />
       </Col>
-      <Col lg="8">
+      <Col lg="9">
         <ProductSummary />
         <ProductsCounter />
       </Col>

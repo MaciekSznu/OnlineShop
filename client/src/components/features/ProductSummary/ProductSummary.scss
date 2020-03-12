@@ -1,26 +1,44 @@
 @import '../../../styles/settings.scss';
 
+
 .productWrapper {
   min-height: 500px;
-  max-width: 400px;
+  max-width: 360px;
+  background: $product-wrapper-background;
+  display: flex;
+  align-items: center;
 
-  .productPhoto {
+  .productLink {
+    display: block;
+    width: 100%;
     height: 100%;
-    background: $product-wrapper-background;
-    padding: 20px;
-    
+
     .productLabel {
       position: absolute;
-      top: 20px;
-      left: 20;
+      top: 30px;
+      left: 30px;
       font-size: $base-size;
-      color: $product-label;
+      //color: $product-label;
+      font-weight: 600;
+    }
+
+    .productPhoto {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      //padding: 20px;
+
+      .productSummaryImage {
+        width: 70%;
+        height: auto;
+      }
     }
 
     .productInfoWrapper {
       position: absolute;
-      bottom: 20px;
-      left: 20;
+      bottom: 30px;
+      left: 30px;
 
       .productInfoName, .productInfoPrice {
         margin: 0;
@@ -28,10 +46,12 @@
 
       .productInfoName {
         font-size: $base-size * 1.2;
+        font-weight: 600;
       }
 
       .productInfoPrice {
         font-size: $base-size;
+        font-weight: 500;
       }
     }
   }
