@@ -4,9 +4,10 @@ import { API_URL } from '../config';
 
 /* SELECTORS */
 export const getProducts = ({ products }) => products.data;
-export const getSingleProduct = ({ products}) => products.Singleproduct;
+export const getSingleProduct = ({ products}) => products.singleProduct;
 
 export const getRequest = ({ products }) => products.request;
+
 export const startRequest = () => ({ type: START_REQUEST });
 export const endRequest = () => ({ type: END_REQUEST });
 export const errorRequest = (error) => ({ error, type: ERROR_REQUEST });
@@ -53,7 +54,7 @@ export const loadSingleProductRequest = (id) => {
     try {
 
       const res = await axios.get(`${API_URL}/products/${id}`);
-      await new Promise((resolve, reject) => setTimeout(resolve, 1000));
+      await new Promise((resolve, reject) => setTimeout(resolve, 1));
       dispatch(loadSingleProduct(res.data));
       dispatch(endRequest());
 

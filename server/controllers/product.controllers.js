@@ -19,6 +19,6 @@ exports.getSingleProduct = async (req, res) => {
       id: req.params.id
     }));
   } catch(err) {
-    res.statys(500).json(err);
+    res.status(500).json(err);
   }
 };

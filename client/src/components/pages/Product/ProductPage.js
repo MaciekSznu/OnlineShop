@@ -1,8 +1,9 @@
 import React from 'react';
+import SingleProduct from '../../features/SingleProduct/SingleProductContainer';
 
-const ProductPage = () => (
+const ProductPage = ({match}) => (
   <div>
-    <h1>ProductPage</h1>
+    <SingleProduct id={match.params.id}/>
   </div>
 );
 

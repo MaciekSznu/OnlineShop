@@ -11,12 +11,14 @@ class ProductSummary extends React.Component {
 
   componentDidMount() {
     const { loadProducts } = this.props;
+    console.log(this.props);
     loadProducts();
   }
 
   render() {
 
     const { products, request } = this.props;
+
     return (
       <div>
         { (request.pending === true || request.success == null) && <Spinner /> }
