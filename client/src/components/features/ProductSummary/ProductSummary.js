@@ -1,39 +1,43 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
 import { Container, Row, Col } from 'reactstrap';
+import { Link } from 'react-router-dom';
 import './ProductSummary.scss';
 import Spinner from '../../common/Spinner/Spinner';
 import Alert from '../../common/Alert/Alert';
-
 
 
 class ProductSummary extends React.Component {
 
   componentDidMount() {
     const { loadProducts } = this.props;
+    console.log(this.props);
     loadProducts();
   }
 
   render() {
 
     const { products, request } = this.props;
+
     return (
       <div>
         { (request.pending === true || request.success == null) && <Spinner /> }
         { (request.pending === false && request.success === true) &&
           <Container>
-            <Row>
-            {products.map(product =>
-              <Col lg="6" className="p-2 productWrapper" key={product.id}>
-                <div className="productPhoto">
-                  <img src={'client/src/assets/ProductsImages/' + product.photo} alt={''} />
+            <Row className="d-flex justify-content-end align-items-end">
+              {products.map(product =>
+                <Col lg="6" className="m-2 productWrapper" key={product.id}>
+                  <Link className="productLink" to={`/products/${product.id}`}>
                   <p className="productLabel">{product.label}</p>
+                  <div className="productPhoto">
+                    <img className="productSummaryImage" src={'http://localhost:3000/' + product.photo} alt={''} />
+                  </div>
                   <div className="productInfoWrapper">
                     <p className="productInfoName">{product.name}</p>
                     <p className="productInfoPrice">{product.price} zł</p>
                   </div>
-                </div>
-              </Col>
+                  </Link>
+                </Col>
               )}
             </Row>
           </Container>
