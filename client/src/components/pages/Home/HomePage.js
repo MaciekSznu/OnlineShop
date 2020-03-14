@@ -3,7 +3,6 @@ import { Container, Row, Col } from 'reactstrap';
 import SortBox from '../../features/SortBox/SortBox';
 import ProductSummary from '../../features/ProductSummary/ProductSummaryContainer';
 //import ProductsCounter from '../../features/ProductsCounter/ProductsCounter';
-import Pagination from '../../common/Pagination/Pagination';
 
 const HomePage = () => (
   <Container>
@@ -12,8 +11,7 @@ const HomePage = () => (
         <SortBox />
       </Col>
       <Col lg="9">
-        <ProductSummary />
-        <Pagination pages={5} onPageChange={(page) => {console.log(page) }}/>
+        <ProductSummary productsPerPage={6}/>
       </Col>
     </Row>
   </Container>

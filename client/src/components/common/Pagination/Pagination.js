@@ -30,7 +30,7 @@ class Pagination extends React.Component {
 
   render() {
 
-    const { pages, onPagaChange } = this.props;
+    const { pages } = this.props;
     const { presentPage } = this.state;
     const { changePage, changePageUp, changePageDown } = this;
 

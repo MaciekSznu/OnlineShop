@@ -5,6 +5,8 @@ import { API_URL } from '../config';
 /* SELECTORS */
 export const getProducts = ({ products }) => products.data;
 export const getSingleProduct = ({ products}) => products.singleProduct;
+export const getPages = ({ products }) => Math.ceil(products.amount / products.postsPerPage);
+
 
 export const getRequest = ({ products }) => products.request;
 
@@ -19,6 +21,7 @@ const createActionName = name => `app/${reducerName}/${name}`;
 /* ACTIONS */
 export const LOAD_PRODUCTS = createActionName('LOAD_PRODUCTS');
 export const LOAD_SINGLE_PRODUCT = createActionName('LOAD_SINGLE_PRODUCT');
+export const LOAD_PRODUCTS_PAGE = createActionName('LOAD_PRODUCTS_PAGE');
 
 export const START_REQUEST = createActionName('START_REQUEST');
 export const END_REQUEST = createActionName('END_REQUEST');
@@ -27,6 +30,8 @@ export const ERROR_REQUEST = createActionName('ERROR_REQUEST');
 
 export const loadProducts = payload => ({ payload, type: LOAD_PRODUCTS });
 export const loadSingleProduct = payload => ({ payload, type: LOAD_SINGLE_PRODUCT });
+export const loadProductsByPage = payload => ({ payload, type: LOAD_PRODUCTS_PAGE });
+
 
 /* THUNKS */
 export const loadProductsRequest = () => {
@@ -64,10 +69,42 @@ export const loadSingleProductRequest = (id) => {
   }
 }
 
+export const loadProductsByPageRequest = (page) => {
+  return async dispatch => {
+
+    dispatch(startRequest());
+    try {
+      const productsPerPage = 4;
+
+      const startAt = (page - 1) * productsPerPage;
+      const limit = productsPerPage;
+
+      const res = await axios.get(`${API_URL}/products/range/${startAt}/${limit}`);
+      await new Promise((resolve, reject) => setTimeout(resolve, 500));
+
+      const payload = {
+        products: res.data.products,
+        amount: res.data.amount,
+        productsPerPage,
+        presentPage: page,
+      };
+
+      dispatch(loadProductsByPage(payload));
+      dispatch(endRequest());
+    } catch(e) {
+      dispatch(errorRequest(e.message));
+    }
+
+  };
+};
+
 /* INITIAL STATE */
 const initialState = {
   data: [],
   singleProduct: null,
+  amount: 0,
+  productsPerPage: 4,
+  presentPage: 1,
   request: {
     pending: false,
     error: null,
@@ -82,6 +119,14 @@ export default function reducer(statePart = initialState, action = {}) {
       return { ...statePart, data: action.payload };
     case LOAD_SINGLE_PRODUCT:
       return { ...statePart, singleProduct: action.payload };
+    case LOAD_PRODUCTS_PAGE:
+      return {
+        ...statePart,
+        productsPerPage: action.payload.productsPerPage,
+        presentPage: action.payload.presentPage,
+        amount: action.payload.amount,
+        data: [...action.payload.products],
+      };
     case START_REQUEST:
       return { ...statePart, request: { pending: true, error: null, success: null }};
     case END_REQUEST:

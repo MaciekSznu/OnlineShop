@@ -5,19 +5,27 @@ import { Link } from 'react-router-dom';
 import './ProductSummary.scss';
 import Spinner from '../../common/Spinner/Spinner';
 import Alert from '../../common/Alert/Alert';
-
+import Pagination from '../../common/Pagination/Pagination';
 
 class ProductSummary extends React.Component {
 
   componentDidMount() {
-    const { loadProducts } = this.props;
+    const { loadProductsByPage } = this.props;
     console.log(this.props);
-    loadProducts();
+    loadProductsByPage(1);
+  }
+
+  loadProductsPage = (page) => {
+    const { loadProductsByPage } = this.props;
+    loadProductsByPage(page);
   }
 
   render() {
 
-    const { products, request } = this.props;
+    const { products, request, pages } = this.props;
+    console.log(this.props);
+
+    const { loadProductsPage } = this;
 
     return (
       <div>
@@ -40,6 +48,9 @@ class ProductSummary extends React.Component {
                 </Col>
               )}
             </Row>
+            <Row>
+              <Pagination pages={pages} onPageChange={loadProductsPage}/>
+            </Row>
           </Container>
         }
         { (request.pending === false && request.error !== null) && <Alert variant="error"> {request.error} </Alert> }
@@ -59,7 +70,7 @@ ProductSummary.propTypes = {
       label: PropTypes.string,
     })
   ),
-  loadProducts: PropTypes.func.isRequired,
+  loadProductsByPage: PropTypes.func.isRequired,
 };
 
 export default ProductSummary;
