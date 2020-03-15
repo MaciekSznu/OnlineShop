@@ -27,7 +27,7 @@ exports.getSingleProduct = async (req, res) => {
 exports.getProductsByRange = async (req, res) => {
 
   try {
-    const { startAt, limit } = req.params;
+    let { startAt, limit } = req.params;
 
     startAt = parseInt(startAt);
     limit = parseInt(limit);
