@@ -10,8 +10,9 @@ import Pagination from '../../common/Pagination/Pagination';
 class ProductSummary extends React.Component {
 
   componentDidMount() {
-    const { loadProductsByPage, initialPage = 1, productsPerPage } = this.props;
-    loadProductsByPage(initialPage, productsPerPage);
+    const { loadProductsByPage, initialPage = 1, productsPerPage, presentPage } = this.props;
+    loadProductsByPage(initialPage, productsPerPage, presentPage);
+    console.log(presentPage);
   }
 
   loadProductsPage = (page) => {
@@ -46,7 +47,7 @@ class ProductSummary extends React.Component {
                 </Col>
               )}
             </Row>
-            <Row>
+            <Row className="d-flex justify-content-end align-items-end">
               { pagination !== undefined && <Pagination pages={pages} onPageChange={loadProductsPage} initialPage={presentPage} /> }
             </Row>
           </Container>
