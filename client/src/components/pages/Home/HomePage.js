@@ -2,7 +2,7 @@ import React from 'react';
 import { Container, Row, Col } from 'reactstrap';
 import SortBox from '../../features/SortBox/SortBox';
 import ProductSummary from '../../features/ProductSummary/ProductSummaryContainer';
-import ProductsCounter from '../../features/ProductsCounter/ProductsCounter';
+//import ProductsCounter from '../../features/ProductsCounter/ProductsCounter';
 
 const HomePage = () => (
   <Container>
@@ -11,8 +11,7 @@ const HomePage = () => (
         <SortBox />
       </Col>
       <Col lg="9">
-        <ProductSummary />
-        <ProductsCounter />
+        <ProductSummary productsPerPage={4} pagination={true} />
       </Col>
     </Row>
   </Container>

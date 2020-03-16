@@ -5,19 +5,26 @@ import { Link } from 'react-router-dom';
 import './ProductSummary.scss';
 import Spinner from '../../common/Spinner/Spinner';
 import Alert from '../../common/Alert/Alert';
-
+import Pagination from '../../common/Pagination/Pagination';
 
 class ProductSummary extends React.Component {
 
   componentDidMount() {
-    const { loadProducts } = this.props;
-    console.log(this.props);
-    loadProducts();
+    const { loadProductsByPage, initialPage = 1, productsPerPage, presentPage } = this.props;
+    loadProductsByPage(initialPage, productsPerPage, presentPage);
+    console.log(presentPage);
+  }
+
+  loadProductsPage = (page) => {
+    const { loadProductsByPage, productsPerPage } = this.props;
+    loadProductsByPage(page, productsPerPage);
   }
 
   render() {
 
-    const { products, request } = this.props;
+    const { products, request, pages, presentPage, pagination } = this.props;
+    const { loadProductsPage } = this;
+    console.log(this.props);
 
     return (
       <div>
@@ -40,6 +47,9 @@ class ProductSummary extends React.Component {
                 </Col>
               )}
             </Row>
+            <Row className="d-flex justify-content-end align-items-end">
+              { pagination !== undefined && <Pagination pages={pages} onPageChange={loadProductsPage} initialPage={presentPage} /> }
+            </Row>
           </Container>
         }
         { (request.pending === false && request.error !== null) && <Alert variant="error"> {request.error} </Alert> }
@@ -59,7 +69,7 @@ ProductSummary.propTypes = {
       label: PropTypes.string,
     })
   ),
-  loadProducts: PropTypes.func.isRequired,
+  loadProductsByPage: PropTypes.func.isRequired,
 };
 
 export default ProductSummary;
