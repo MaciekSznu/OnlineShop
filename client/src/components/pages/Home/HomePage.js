@@ -11,7 +11,7 @@ const HomePage = () => (
         <SortBox />
       </Col>
       <Col lg="9">
-        <ProductSummary productsPerPage={10} />
+        <ProductSummary productsPerPage={2} />
       </Col>
     </Row>
   </Container>

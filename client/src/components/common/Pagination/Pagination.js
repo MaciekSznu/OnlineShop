@@ -17,14 +17,17 @@ class Pagination extends React.Component {
   }
 
   changePageUp = () => {
+    const { pages } = this.props;
     const { presentPage } = this.state;
     const { changePage } = this;
+    if (presentPage < pages)
     changePage(presentPage + 1);
   };
 
   changePageDown = () => {
     const { presentPage } = this.state;
     const { changePage } = this;
+    if (presentPage > 1)
     changePage(presentPage - 1);
   };
 
@@ -32,14 +35,14 @@ class Pagination extends React.Component {
 
     const { pages } = this.props;
     const { presentPage } = this.state;
-    const { changePage, changePageUp, changePageDown } = this;
+    const { changePage } = this;
 
     return (
       <div className="pagination">
         <ul className="pagination__list">
 
           {presentPage > 1 && (
-              <li className="pagination__list__item" onClick={changePageDown}>
+              <li className={`pagination__list__item${(true) ? ' pagination__list__item' : '' }`} onClick={this.changePageDown}>
                 {'<'}
               </li>
           )}
@@ -54,7 +57,7 @@ class Pagination extends React.Component {
           )}
 
           {presentPage < pages && (
-            <li className="pagination__list__item" onClick={changePageUp}>
+            <li className={`pagination__list__item${(true) ? ' pagination__list__item' : '' }`} onClick={this.changePageUp}>
               {'>'}
             </li>
           )}

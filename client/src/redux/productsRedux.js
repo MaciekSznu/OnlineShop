@@ -6,7 +6,7 @@ import { API_URL } from '../config';
 export const getProducts = ({ products }) => products.data;
 export const getSingleProduct = ({ products}) => products.singleProduct;
 export const getPages = ({ products }) => Math.ceil(products.amount / products.productsPerPage);
-export const getActialPage = ({ products }) => products.presentPage;
+export const getPresentPage = ({ products }) => products.presentPage;
 
 
 export const getRequest = ({ products }) => products.request;
@@ -70,7 +70,7 @@ export const loadSingleProductRequest = (id) => {
   }
 }
 
-export const loadProductsByPageRequest = (page, productsPerPage = 4) => {
+export const loadProductsByPageRequest = (page, productsPerPage) => {
   return async dispatch => {
 
     dispatch(startRequest());

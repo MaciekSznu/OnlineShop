@@ -10,7 +10,7 @@ import Pagination from '../../common/Pagination/Pagination';
 class ProductSummary extends React.Component {
 
   componentDidMount() {
-    const { loadProductsByPage, initialPage = 1, productsPerPage } = this.props;
+    const { loadProductsByPage, initialPage, productsPerPage } = this.props;
     loadProductsByPage(initialPage, productsPerPage);
   }
 
@@ -47,7 +47,7 @@ class ProductSummary extends React.Component {
               )}
             </Row>
             <Row>
-              <Pagination pages={pages} onPageChange={(presentPage) => console.log(presentPage)} initialPage={presentPage} />
+              <Pagination pages={pages} onPageChange={loadProductsPage} initialPage={presentPage} />
             </Row>
           </Container>
         }
