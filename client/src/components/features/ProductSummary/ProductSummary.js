@@ -46,7 +46,7 @@ class ProductSummary extends React.Component {
                 </Col>
               )}
             </Row>
-            <Row>
+            <Row className="d-flex justify-content-end">
               <Pagination pages={pages} onPageChange={loadProductsPage} initialPage={presentPage} />
             </Row>
           </Container>
