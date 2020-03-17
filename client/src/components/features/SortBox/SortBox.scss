@@ -1,0 +1,10 @@
+.sortButton {
+  cursor: pointer;
+
+  &:hover, &:focus, &:active {
+
+    .sortButtonText {
+    font-weight: 600;
+    }
+  }
+}

@@ -7,10 +7,16 @@ export const getProducts = ({ products }) => products.data;
 export const getSingleProduct = ({ products}) => products.singleProduct;
 export const getPages = ({ products }) => Math.ceil(products.amount / products.productsPerPage);
 export const getPresentPage = ({ products }) => products.presentPage;
-
+export const getProductsSorted = ({ products }) => {
+  const sortProducts = [...products.data].sort((a, b) => {
+    if (a[products.key] > b[products.key]) return products.direction === 'asc' ? 1 : -1;
+    if (a[products.key] < b[products.key]) return products.direction === 'asc' ? -1 : 1;
+    return 0;
+  });
+  return sortProducts;
+};
 
 export const getRequest = ({ products }) => products.request;
-
 export const startRequest = () => ({ type: START_REQUEST });
 export const endRequest = () => ({ type: END_REQUEST });
 export const errorRequest = (error) => ({ error, type: ERROR_REQUEST });
@@ -23,6 +29,8 @@ const createActionName = name => `app/${reducerName}/${name}`;
 export const LOAD_PRODUCTS = createActionName('LOAD_PRODUCTS');
 export const LOAD_SINGLE_PRODUCT = createActionName('LOAD_SINGLE_PRODUCT');
 export const LOAD_PRODUCTS_PAGE = createActionName('LOAD_PRODUCTS_PAGE');
+export const SORT_OPTIONS = createActionName('SORT_OPTIONS');
+
 
 export const START_REQUEST = createActionName('START_REQUEST');
 export const END_REQUEST = createActionName('END_REQUEST');
@@ -32,6 +40,8 @@ export const ERROR_REQUEST = createActionName('ERROR_REQUEST');
 export const loadProducts = payload => ({ payload, type: LOAD_PRODUCTS });
 export const loadSingleProduct = payload => ({ payload, type: LOAD_SINGLE_PRODUCT });
 export const loadProductsByPage = payload => ({ payload, type: LOAD_PRODUCTS_PAGE });
+export const sortOptions = payload => ({ payload, type: SORT_OPTIONS });
+
 
 
 /* THUNKS */
@@ -104,6 +114,8 @@ const initialState = {
   amount: 0,
   productsPerPage: 4,
   presentPage: 1,
+  key: '',
+  direction: '',
   request: {
     pending: false,
     error: null,
@@ -126,6 +138,9 @@ export default function reducer(statePart = initialState, action = {}) {
         amount: action.payload.amount,
         data: [...action.payload.products],
       };
+
+    case SORT_OPTIONS:
+      return { ...statePart, key: action.payload.key, direction: action.payload.direction };
     case START_REQUEST:
       return { ...statePart, request: { pending: true, error: null, success: null }};
     case END_REQUEST:
